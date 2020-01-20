@@ -1,7 +1,4 @@
 {
-    "type": "object",
-    "properties": {
-      "level": {
         "type": "string",
         "enum": [
             "ERROR",
@@ -10,7 +7,5 @@
             "DEBUG",
             "TRACE"
         ]
-      }
-    },
-    "additionalProperties": false
+
   }
