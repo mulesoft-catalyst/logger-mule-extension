@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module name="HF Logger"
+<module name="Logger Mule Extension"
         prefix="module-logger"
         doc:description="This module relies entirely in runtime provided components (no other Plugin dependencies)"
 
@@ -20,24 +20,33 @@
         </parameters>
      
         <body>
-            <mule:choice doc:name="Choice" doc:id="9b0c9b38-c09b-4beb-b078-110d07740ac3" >
+            <mule:set-variable value='#[output application/json indent=false
+---
+{
+	level: vars.level,
+	executionPoint: vars.executionPoint,
+	correlationId: vars.correlationId default "missing correlationId",
+	message: vars.message
+}]' doc:name="Set Variable" doc:id="0c1d3cfe-c3a9-48cf-81c0-24a7b7580da6" variableName="logTrace"/>
+
+            <mule:choice doc:name="Choice" doc:id="9b0c9b38-c09b-4beb-b078-110d07740ac3">
                 <mule:when expression='#[vars.level == "INFO"]'>
-                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[vars.message]"/>
+                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[vars.logTrace]" category="logger-mule-extension"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "WARN"]'>
-                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[vars.message]"/>
+                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[vars.logTrace]" category="logger-mule-extension"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "DEBUG"]'>
-                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[vars.message]"/>
+                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[vars.logTrace]" category="logger-mule-extension"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "ERROR"]'>
-                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[vars.message]"/>
+                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[vars.logTrace]" category="logger-mule-extension"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "TRACE"]'>
-                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[vars.message]"/>
+                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[vars.logTrace]" category="logger-mule-extension"/>
                 </mule:when>
-                <mule:otherwise >
-                    <mule:logger level="INFO" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" />
+                <mule:otherwise>
+                    <mule:logger level="ERROR" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" message="Unknown log level received" category="logger-mule-extension"/>
                 </mule:otherwise>
             </mule:choice>
 
