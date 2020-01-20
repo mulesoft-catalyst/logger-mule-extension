@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+      xmlns:munitext="http://www.mulesoft.org/schema/mule/munit-tools"
+      xmlns:module-logger="http://www.mulesoft.org/schema/mule/module-logger"
+      xmlns="http://www.mulesoft.org/schema/mule/core"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core      http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/munit     http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+        http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+        http://www.mulesoft.org/schema/mule/module-logger http://www.mulesoft.org/schema/mule/module-logger/current/mule-module-logger.xsd">
+
+    <munit:config name="assertionconfig"/>
+
+    <munit:test name="testSetPayloadHardcoded" description="">
+        <munit:execution>
+            <module-logger:set-payload-hardcoded/>
+        </munit:execution>
+        <munit:validation>
+            <munitext:assert-that expression="#[payload]" is="#[MunitTools::equalTo('Wubba Lubba Dub Dub')]" message="Oops this should have been true"/>
+        </munit:validation>
+    </munit:test>
+
+    <munit:test name="testSetPayloadEcho" description="">
+    <munit:execution>
+        <module-logger:set-payload-echo inputParam="food"/>
+    </munit:execution>
+    <munit:validation>
+        <munitext:assert-that expression="#[payload]" is="#[MunitTools::equalTo('food')]" message="Oops this should have been true"/>
+    </munit:validation>
+    </munit:test>
+
+</mule>

@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "properties": {
+      "level": {
+        "type": "string",
+        "enum": [
+            "ERROR",
+            "WARN",
+            "INFO",
+            "DEBUG",
+            "TRACE"
+        ]
+      }
+    },
+    "additionalProperties": false
+  }
