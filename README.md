@@ -1,6 +1,7 @@
 ## Creation
 
-This extension was built using SDK version 1.1 and archetype version 1.0.1
+This extension was built using SDK version 1.1 and archetype version 1.0.1.
+It's a Logger module that enforces best practices and outputs log fields in JSON format.
 
 https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#create-and-test-an-xml-sdk-project
 
@@ -43,4 +44,8 @@ To use this smart connector add the following to your pom file:
 	<classifier>mule-plugin</classifier>
 </dependency>
 ```
+### Sample output
 
+```
+INFO  2020-01-21 15:06:41,116 [[MuleRuntime].cpuLight.23: [xml-sdk-companion].smart-connector-code.CPU_LITE @10c3bfdd] [event: c4618950-3c78-11ea-8cbd-38f9d3924940] logger-mule-extension: {"level": "INFO","applicationName": "xml-sdk-companion","applicationVersion": "1.0.0","executionPoint": "flow-name","correlationId": "c4618950-3c78-11ea-8cbd-38f9d3924940","message": {"key": "value"}}
+```

@@ -11,6 +11,10 @@
            http://www.mulesoft.org/schema/mule/module http://www.mulesoft.org/schema/mule/module/current/mule-module.xsd
            http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 
+    <property name="appName" displayName="Application Name" type="string"  doc:description="Application name"/>
+    <property name="appVersion" displayName="Application Version" type="string"  doc:description="Application version"/>
+
+
     <operation name="log" doc:description="Logs according to HF best practices">
          <parameters>
             <parameter name="level" type="LevelJsonType" defaultValue="DEBUG"/>
@@ -24,6 +28,8 @@
 ---
 {
 	level: vars.level,
+	applicationName: vars.appName,
+	applicationVersion: vars.appVersion,
 	executionPoint: vars.executionPoint,
 	correlationId: vars.correlationId default "missing correlationId",
 	message: vars.message
