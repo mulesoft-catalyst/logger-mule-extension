@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>org.mule.extension</groupId>
+    <groupId>YOUR_ORG_ID</groupId>
     <artifactId>logger-mule-extension</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
@@ -12,6 +11,7 @@
  
     <properties>
         <!-- XML SDK properties-->
+        <anypoint.org.id>YOUR_ORG_ID</anypoint.org.id>
         <mule.version>4.1.1</mule.version>
         <mule.extensions.maven.plugin.version>1.1.5</mule.extensions.maven.plugin.version>
         <munit.version>2.1.3</munit.version>
@@ -168,5 +168,14 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>ExchangeRepository</id>
+            <name>Corporate Repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${anypoint.org.id}/maven</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 
 </project>

@@ -29,9 +29,33 @@ Follow this documentation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#exampl
 Enumerations (DropBox in UI) are strings in the json schema, not objects.
 
 
-## Build
-
+## Build and Deployment
+#### Compile
+mvn clean package -DskipTests=true
+#### Install in local maven repository
 mvn clean install -DskipTests=true
+
+#### Upload to Exchange 
+
+* make sure your ORG ID number is being used as the artifact's _groupId_ in your pom file
+* also, define a property in your pom file, like this:
+  ```
+   <anypoint.org.id>YOUR_ORG_ID</anypoint.org.id>
+  ```
+  This property is used in the Distribution Management section of the pom file.
+* verify you have defined the repository server credentials, the Exchange credentials in this case, in your maven settings.xml file
+  ```
+  <server>
+          <id>ExchangeRepository</id>
+          <username>YOUR_USERNAME</username>
+          <password>YOUR_PASSWORD</password>
+  </server>
+  ```
+
+Finally, execute the following command:
+
+mvn clean deploy -DskipTests=true
+
 
 ## Usage
 
@@ -47,5 +71,5 @@ To use this smart connector add the following to your pom file:
 ### Sample output
 
 ```
-INFO  2020-01-21 15:06:41,116 [[MuleRuntime].cpuLight.23: [xml-sdk-companion].smart-connector-code.CPU_LITE @10c3bfdd] [event: c4618950-3c78-11ea-8cbd-38f9d3924940] logger-mule-extension: {"level": "INFO","applicationName": "xml-sdk-companion","applicationVersion": "1.0.0","executionPoint": "flow-name","correlationId": "c4618950-3c78-11ea-8cbd-38f9d3924940","message": {"key": "value"}}
+INFO  2020-05-24 19:45:39,059 [[MuleRuntime].cpuLight.22: [playground].playgroundFlow.CPU_LITE @5c6a236b] [event: 484d43f0-9e10-11ea-bc96-38f9d3924940] logger-mule-extension: {"level": "INFO","timestamp": "2020-05-24T19:45:38.989-03:00","environment": "local","applicationName": "playground","applicationVersion": "1.0.0","flowName": "flow-name","correlationId": "484d43f0-9e10-11ea-bc96-38f9d3924940","message": "This is a sample message","content": {"accountId": "2345994","status": "closed","entitlements": ["BA","KA","PP"]}}
 ```
