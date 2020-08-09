@@ -64,7 +64,7 @@ To use this smart connector add the following to your pom file:
 <dependency>
     <groupId>org.mule.extension</groupId>
 	<artifactId>logger-mule-extension</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<classifier>mule-plugin</classifier>
 </dependency>
 ```

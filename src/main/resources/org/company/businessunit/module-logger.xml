@@ -11,16 +11,16 @@
            http://www.mulesoft.org/schema/mule/module http://www.mulesoft.org/schema/mule/module/current/mule-module.xsd
            http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
 
-    <property name="appName" displayName="Application Name" type="string"  doc:description="Application name"/>
+    <property name="appName" displayName="Application Name" type="string"  doc:description="Application name" defaultValue="#[Mule::p('app.name')]"/>
     <property name="appVersion" displayName="Application Version" type="string"  doc:description="Application version"/>
-    <property name="environment" displayName="Environment" type="string" doc:description="Execution environment name i.e: QA."/>
+    <property name="environment" displayName="Environment" type="string" defaultValue="#[Mule::p('mule.env')]" doc:description="Execution environment name, typically loaded in a runtime property i.e: mule.env"/>
 
 
     <operation name="log" doc:description="Logs enforcing output format and content">
          <parameters>
-            <parameter name="level" type="LevelJsonType" defaultValue="DEBUG"/>
+            <parameter name="level" type="LevelJsonType" defaultValue="INFO"/>
             <parameter name="flowName" type="string"/>
-            <parameter name="correlationId" type="string" defaultValue="#[vars.correlationId]"/>
+            <parameter name="correlationId" type="string" defaultValue="#[correlationId]"/>
             <parameter name="message" use="OPTIONAL" type="string" doc:description="Free text to describe context of logging this log or exception entry"/>
             <parameter name="content" use="OPTIONAL" type="string" doc:description="Can contain attributes/payloads for logs, or exception payload for errors"/>
         </parameters>
@@ -35,7 +35,7 @@
 	applicationName: vars.appName,
 	applicationVersion: vars.appVersion,
 	flowName: vars.flowName,
-	correlationId: vars.correlationId default "missing correlationId",
+	correlationId: vars.correlationId,
 	message: vars.message,
 	content: vars.content
 }]' doc:name="Set Variable" doc:id="0c1d3cfe-c3a9-48cf-81c0-24a7b7580da6" />
@@ -60,8 +60,6 @@
                     <mule:logger level="ERROR" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" message="Unknown log level received" category="logger-mule-extension"/>
                 </mule:otherwise>
             </mule:choice>
-
         </body>
-        
     </operation>
  </module>
