@@ -28,6 +28,9 @@ Follow this documentation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#exampl
 
 Enumerations (DropBox in UI) are strings in the json schema, not objects.
 
+## Custom Icon
+
+The default icon could be replaced with a customized logo by replacing the icon.svg file under the icon folder at root project level
 
 ## Build and Deployment
 #### Compile
