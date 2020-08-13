@@ -33,6 +33,10 @@ Enumerations (DropBox in UI) are strings in the json schema, not objects.
 The default icon could be replaced with a customized logo by replacing the icon.svg file under the icon folder at root project level
 
 ## Build and Deployment
+
+Replace YOUR_ORG_ID value in the POM file for the actual id of the anypoint platform organization where you will be 
+publishing the module
+
 #### Compile
 mvn clean package -DskipTests=true
 #### Install in local maven repository
@@ -40,7 +44,7 @@ mvn clean install -DskipTests=true
 
 #### Upload to Exchange 
 
-* make sure your ORG ID number is being used as the artifact's _groupId_ in your pom file
+* Again, make sure your ORG ID number is being used as the artifact's _groupId_ in your pom file
 * also, define a property in your pom file, like this:
   ```
    <anypoint.org.id>YOUR_ORG_ID</anypoint.org.id>
@@ -49,7 +53,7 @@ mvn clean install -DskipTests=true
 * verify you have defined the repository server credentials, the Exchange credentials in this case, in your maven settings.xml file
   ```
   <server>
-          <id>ExchangeRepository</id>
+          <id>exchange-maven-facade</id>
           <username>YOUR_USERNAME</username>
           <password>YOUR_PASSWORD</password>
   </server>
@@ -65,12 +69,16 @@ mvn clean deploy -DskipTests=true
 To use this smart connector add the following to your pom file:
 ```
 <dependency>
-    <groupId>org.mule.extension</groupId>
+    <groupId>YOUR_ORG_ID</groupId>
 	<artifactId>logger-mule-extension</artifactId>
 	<version>1.0.0</version>
 	<classifier>mule-plugin</classifier>
 </dependency>
 ```
+
+Remember you replaced YOUR_ORG_ID for the actual id of the anypoint platform organization where you want to 
+publish the module
+
 ### Sample output
 
 ```
