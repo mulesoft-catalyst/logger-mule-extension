@@ -3,9 +3,10 @@
 This extension was built using SDK version 1.1 and archetype version 1.0.1.
 It's a Logger module that enforces best practices and outputs log fields in JSON format.
 
+Mule XML SDK initial project steps:
 https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#create-and-test-an-xml-sdk-project
 
-There is an issue and you have to add the following to your pom file
+There is an issue with the generated code and you have to add the following to your pom file
 to get, the created archetype, to compile:
 
 ```
@@ -24,7 +25,7 @@ to get, the created archetype, to compile:
 
 ### Custom Types
 
-Follow this documentation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#example-using-json-custom-types.
+We use custom types to create enumeration-type fields. Please follow this documentation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#example-using-json-custom-types.
 
 Enumerations (DropBox in UI) are strings in the json schema, not objects.
 
@@ -37,10 +38,22 @@ The default icon could be replaced with a customized logo by replacing the icon.
 Replace YOUR_ORG_ID value in the POM file for the actual id of the anypoint platform organization where you will be 
 publishing the module
 
+The following changes are not mandatory but recommended:
+
+* Customize the package name according to your organization guidelines. The default value is 'org.company.businessunit'.
+* Use that same value for the category in each trace. Current value is 'logger-mule-extension'. This is the value
+  that you will use to modify  the trace level in Runtime Manager if you are deploying in CloudHub
+
 #### Compile
+```
 mvn clean package -DskipTests=true
+```
+
 #### Install in local maven repository
+
+```
 mvn clean install -DskipTests=true
+````
 
 #### Upload to Exchange 
 
