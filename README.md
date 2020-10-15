@@ -74,8 +74,9 @@ mvn clean install -DskipTests=true
 
 Finally, execute the following command:
 
+```
 mvn clean deploy -DskipTests=true
-
+```
 
 ## Usage
 
