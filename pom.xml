@@ -11,7 +11,7 @@
  
     <properties>
         <!-- XML SDK properties-->
-        <anypoint.org.id>YOUR_ORG_ID</anypoint.org.id>
+        <anypoint.org.id>${project.groupId}</anypoint.org.id>
         <mule.version>4.1.1</mule.version>
         <mule.extensions.maven.plugin.version>1.1.5</mule.extensions.maven.plugin.version>
         <munit.version>2.1.3</munit.version>
@@ -25,7 +25,7 @@
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <maven.install.plugin.version>2.5.2</maven.install.plugin.version>
         <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
-        <maven.site.plugin.version>3.6.1</maven.site.plugin.version>
+        <maven.site.plugin.version>3.6</maven.site.plugin.version>
         <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
         <maven.surefire.plugin.version>2.22.0</maven.surefire.plugin.version>
     </properties>
@@ -171,7 +171,7 @@
 
     <distributionManagement>
         <repository>
-            <id>exchange-maven-facade</id>
+            <id>anypoint-exchange-v2</id>
             <name>Exchange Repository</name>
             <url>https://maven.anypoint.mulesoft.com/api/v2/organizations/${anypoint.org.id}/maven</url>
             <layout>default</layout>

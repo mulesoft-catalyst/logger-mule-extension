@@ -66,7 +66,7 @@ mvn clean install -DskipTests=true
 * verify you have defined the repository server credentials, the Exchange credentials in this case, in your maven settings.xml file
   ```
   <server>
-          <id>exchange-maven-facade</id>
+          <id>anypoint-exchange-v2</id>
           <username>YOUR_USERNAME</username>
           <password>YOUR_PASSWORD</password>
   </server>
