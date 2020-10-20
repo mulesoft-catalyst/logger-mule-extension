@@ -25,7 +25,8 @@ to get, the created archetype, to compile:
 
 ### Custom Types
 
-We use custom types to create enumeration-type fields. Please follow this documentation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#example-using-json-custom-types.
+We use custom types to create enumeration-type fields. Please follow this documentation to understand the process of 
+creating such a field for an operation: https://docs.mulesoft.com/mule-sdk/1.1/xml-sdk#example-using-json-custom-types.
 
 Enumerations (DropBox in UI) are strings in the json schema, not objects.
 
@@ -55,7 +56,41 @@ mvn clean package -DskipTests=true
 mvn clean install -DskipTests=true
 ````
 
-#### Upload to Exchange 
+## Usage
+
+To use this smart connector add the following maven dependency snippet to your mule project pom file. Please verify the
+version you want to bring to your project:
+
+```
+<dependency>
+    <groupId>YOUR_ORG_ID</groupId>
+	<artifactId>logger-mule-extension</artifactId>
+	<version>1.0.0</version>
+	<classifier>mule-plugin</classifier>
+</dependency>
+```
+
+Remember you replaced YOUR_ORG_ID for the actual id of the anypoint platform organization where you want to 
+publish the module
+
+#### Testing Process For New Module's Versions 
+
+Assuming you have created a project in Anypoint Studio, where you have added the module's dependency snippet: 
+     
+##### Testing Loop
+
+- Every time you want to try module's changes in Studio, increase the POM file version number (i.e from 1.0.0 to 1.0.1) and install again into your local m2 repository. 
+- Update the POM file in the mule project where you are using the new module. After saving the POM file, you should see your new version loaded in the Package Explorer.
+     
+When you are done testing you will need to do the following: 
+ - Go back the module version in the POM file to the version that corresponds with the new release (i.e from 1.0.12 to 1.0.2). Your are ready to continue with the upload (Deploy) to Exchange step.
+ - Go to Anypoint Studio and reset the modules cache: Anypoint Studio -> Preferences -> Anypoint Studio -> Tooling -> Modules Cache -> Reset
+ - This last step is needed so that Studio can pick up again the new module version but containing all the changes introduced by all the temporary module's versions. 
+ Studio does not reload a dependency jar’s file for a previously loaded version, It is kept in its cache and that is why we need to reset it.
+
+
+
+### Upload to Exchange 
 
 * Again, make sure your ORG ID number is being used as the artifact's _groupId_ in your pom file
 * also, define a property in your pom file, like this:
@@ -77,20 +112,6 @@ Finally, execute the following command:
 mvn clean deploy -DskipTests=true
 
 
-## Usage
-
-To use this smart connector add the following to your pom file:
-```
-<dependency>
-    <groupId>YOUR_ORG_ID</groupId>
-	<artifactId>logger-mule-extension</artifactId>
-	<version>1.0.0</version>
-	<classifier>mule-plugin</classifier>
-</dependency>
-```
-
-Remember you replaced YOUR_ORG_ID for the actual id of the anypoint platform organization where you want to 
-publish the module
 
 ### Sample output
 
