@@ -42,8 +42,7 @@ publishing the module
 The following changes are not mandatory but recommended:
 
 * Customize the package name according to your organization guidelines. The default value is 'org.company.businessunit'.
-* Use that same value for the category in each trace. Current value is 'logger-mule-extension'. This is the value
-  that you will use to modify  the trace level in Runtime Manager if you are deploying in CloudHub
+* You might also consider customizing the default category value. 
 
 #### Compile
 ```
