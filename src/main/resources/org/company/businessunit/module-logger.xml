@@ -19,8 +19,9 @@
     <operation name="log" doc:description="Logs enforcing output format and content">
          <parameters>
             <parameter name="level" type="LevelJsonType" defaultValue="INFO"/>
-            <parameter name="flowName" type="string"/>
-            <parameter name="correlationId" type="string" defaultValue="#[correlationId]"/>
+            <parameter name="category" use="OPTIONAL" type="string" defaultValue="com.mulesoft.services.logger.mule.extension" doc:description="The log category to be used"/>
+            <parameter name="flowName" type="string" doc:description="The name of the current flow" />
+            <parameter name="correlationId" type="string" doc:description="The correlationId of the message being processed" defaultValue="#[correlationId]" />
             <parameter name="message" use="OPTIONAL" type="string" doc:description="Free text to describe context of logging this log or exception entry"/>
             <parameter name="content" use="OPTIONAL" type="string" doc:description="Can contain attributes/payloads for logs, or exception payload for errors"/>
         </parameters>
@@ -42,22 +43,22 @@
 
             <mule:choice doc:name="Choice" doc:id="9b0c9b38-c09b-4beb-b078-110d07740ac3">
                 <mule:when expression='#[vars.level == "INFO"]'>
-                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[vars.logTrace]" category="logger-mule-extension"/>
+                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[vars.logTrace]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "WARN"]'>
-                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[vars.logTrace]" category="logger-mule-extension"/>
+                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[vars.logTrace]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "DEBUG"]'>
-                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[vars.logTrace]" category="logger-mule-extension"/>
+                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[vars.logTrace]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "ERROR"]'>
-                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[vars.logTrace]" category="logger-mule-extension"/>
+                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[vars.logTrace]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "TRACE"]'>
-                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[vars.logTrace]" category="logger-mule-extension"/>
+                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[vars.logTrace]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:otherwise>
-                    <mule:logger level="ERROR" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" message="Unknown log level received" category="logger-mule-extension"/>
+                    <mule:logger level="ERROR" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" message="Unknown log level received" category="#[vars.category]"/>
                 </mule:otherwise>
             </mule:choice>
         </body>
