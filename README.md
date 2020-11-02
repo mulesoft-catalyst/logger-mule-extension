@@ -109,8 +109,9 @@ When you are done testing you will need to do the following:
 
 Finally, execute the following command:
 
+```
 mvn clean deploy -DskipTests=true
-
+```
 
 
 ### Sample output
