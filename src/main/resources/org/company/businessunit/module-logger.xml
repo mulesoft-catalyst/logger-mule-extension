@@ -10,7 +10,7 @@
         xsi:schemaLocation="
            http://www.mulesoft.org/schema/mule/module http://www.mulesoft.org/schema/mule/module/current/mule-module.xsd
            http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
-
+           
     <property name="appName" displayName="Application Name" type="string"  doc:description="Application name" defaultValue="#[Mule::p('app.name')]"/>
     <property name="appVersion" displayName="Application Version" type="string"  doc:description="Application version"/>
     <property name="environment" displayName="Environment" type="string" defaultValue="#[Mule::p('mule.env')]" doc:description="Execution environment name, typically loaded in a runtime property i.e: mule.env"/>
@@ -27,40 +27,41 @@
         </parameters>
      
         <body>
-            <mule:set-variable variableName="logTrace" value='#[output application/json skipNullOn="everywhere", indent=false
+            <mule:set-payload value='#[output application/json skipNullOn="everywhere", indent=false
 ---
 {
-	level: vars.level,
-	timestamp: now(),
-	environment: vars.environment,
-	applicationName: vars.appName,
-	applicationVersion: vars.appVersion,
-	flowName: vars.flowName,
-	correlationId: vars.correlationId,
-	message: vars.message,
-	content: vars.content
-}]' doc:name="Set Variable" doc:id="0c1d3cfe-c3a9-48cf-81c0-24a7b7580da6" />
+    level: vars.level,
+    timestamp: now(),
+    environment: vars.environment,
+    applicationName: vars.appName,
+    applicationVersion: vars.appVersion,
+    flowName: vars.flowName,
+    correlationId: vars.correlationId,
+    message: vars.message,
+    content: vars.content
+}]' doc:name="Set Payload" doc:id="0c1d3cfe-c3a9-48cf-81c0-24a7b7580da6" />
 
             <mule:choice doc:name="Choice" doc:id="9b0c9b38-c09b-4beb-b078-110d07740ac3">
                 <mule:when expression='#[vars.level == "INFO"]'>
-                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[vars.logTrace]" category="#[vars.category]"/>
+                    <mule:logger level="INFO" doc:name="Logger" doc:id="aaa0da52-3fc5-4be5-8ced-70773e6c6c96" message="#[payload]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "WARN"]'>
-                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[vars.logTrace]" category="#[vars.category]"/>
+                    <mule:logger level="WARN" doc:name="Logger" doc:id="c8755864-e9b5-448e-bc96-95be7f71f747" message="#[payload]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "DEBUG"]'>
-                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[vars.logTrace]" category="#[vars.category]"/>
+                    <mule:logger level="DEBUG" doc:name="Logger" doc:id="430964c5-9d76-4f38-94e9-8bf43a5f19da" message="#[payload]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "ERROR"]'>
-                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[vars.logTrace]" category="#[vars.category]"/>
+                    <mule:logger level="ERROR" doc:name="Logger" doc:id="1abb6878-5795-49f0-a460-574f1ebbebd8" message="#[payload]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:when expression='#[vars.level == "TRACE"]'>
-                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[vars.logTrace]" category="#[vars.category]"/>
+                    <mule:logger level="TRACE" doc:name="Logger" doc:id="e3199399-762f-4318-9a3c-bbab655ebfa4" message="#[payload]" category="#[vars.category]"/>
                 </mule:when>
                 <mule:otherwise>
                     <mule:logger level="ERROR" doc:name="Logger" doc:id="7c176668-0227-4aee-b7cf-489bd1052ab2" message="Unknown log level received" category="#[vars.category]"/>
                 </mule:otherwise>
             </mule:choice>
         </body>
+        <output type="string" doc:description="Log information in JSON format."/>
     </operation>
  </module>
